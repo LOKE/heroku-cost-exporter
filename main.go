@@ -242,12 +242,17 @@ type HerokuTeamUsage struct {
 
 func (e *CostExporter) updateHerokuMetrics() error {
 	apiKey := os.Getenv("HEROKU_API_KEY")
+	teamID := os.Getenv("HEROKU_TEAM_ID")
 	if apiKey == "" {
 		log.Println("HEROKU_API_KEY not set, skipping Heroku invoice metrics")
 		return nil
 	}
+	if teamID == "" {
+		log.Println("HEROKU_TEAM_ID not set, skipping Heroku invoice metrics")
+		return nil
+	}
 
-	url := "https://api.heroku.com/account/invoices"
+	url := fmt.Sprintf("https://api.heroku.com/teams/%s/invoices", teamID)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return fmt.Errorf("failed to create request: %w", err)
