@@ -1,6 +1,6 @@
 # Heroku Cost Exporter
 
-**Generated using [Antigravity](https://antigravity.dev)**
+**Generated using [Antigravity](https://antigravity.google)**
 
 A Prometheus exporter that collects cost and usage data from Heroku, providing metrics for invoices and team usage.
 
